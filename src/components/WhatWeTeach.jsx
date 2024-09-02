@@ -13,7 +13,7 @@ const WhatWeTeach = () => {
       <Box
         display="flex"
         alignItems="center"
-        w="100vw"
+        w="100%"
         flexDirection="column"
         bgColor="black"
         p={"4rem"}
@@ -22,7 +22,7 @@ const WhatWeTeach = () => {
           What tech we use
         </Heading>
         <CompactTable />
-        <Box borderBottom="1px solid #E0E0E0" w={"100%"} />
+        <Box borderBottom="1px solid #E0E0E0" w={"100%"}/>
         <Heading color="#ACACAC" fontWeight={500} fontSize="18px" mt="1rem">
           Front-End
         </Heading>

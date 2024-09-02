@@ -10,6 +10,7 @@ import {
 import React from "react";
 import Tabs from "../ui/Tabs";
 import LineBar from "../../assets/pointerBar.png";
+import lineBar from "../../assets/imgpsh_fullsize_anim.png";
 
 const timelineData = [
   { date: "Oct 12, 2023", phase: "Phase 1", description: "Lorem ipsum" },
@@ -44,11 +45,12 @@ const TimeLines = () => {
             display="flex"
             flexDirection="column"
           >
-            <Box
+            {/* <Box
               borderBottom="1px solid #E8155DD6"
               w={"100%"}
               py={"1rem"}
-            />
+            /> */}
+            <Image w={"100%"} src={lineBar} />
             <Flex
               direction="row"
               w="100%"
@@ -67,17 +69,17 @@ const TimeLines = () => {
                     h="104.29px"
                     label={item.description}
                     placement="top"
+                    px="8rem"
                   >
                     <Box
-                      top="11px"
+                      bottom="5rem"
                       as="button"
                       borderRadius="50%"
                       w="8.34px"
                       h="8.34px"
-                      px="0"
                       marginTop="-1rem"
                       position="relative"
-                      mb={"3rem"}
+                      mb="3rem"
                       bgColor="#E5195E"
                     >
                       <Box
@@ -90,17 +92,29 @@ const TimeLines = () => {
                         px="0"
                         marginTop="-1rem"
                         position="relative"
-                        mb={"3rem"}
                         bgColor="#E5195E42"
                       />
+
+                      <Box
+                        display="flex"
+                        w="220.85px"
+                        h="104.29px"
+                        flexDirection="row"
+                        position="relative"
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        <Box display="flex" flexDirection="column" alignItems="center" mr="8rem">
+                          <Text fontSize="sm" color="white">
+                            {item.date}
+                          </Text>
+                          <Text fontSize="xs" color="white">
+                            {item.phase}
+                          </Text>
+                        </Box>
+                      </Box>
                     </Box>
                   </Tooltip>
-                  <Text fontSize="sm" color="white">
-                    {item.date}
-                  </Text>
-                  <Text fontSize="xs" color="white">
-                    {item.phase}
-                  </Text>
                 </Flex>
               ))}
             </Flex>

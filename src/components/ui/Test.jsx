@@ -1,259 +1,292 @@
-// import banner from "../../assets/handvector.png";
-// import heart from "../../assets/health.png";
-// import React, { useState } from "react";
-// import { ChakraProvider, Box, Center, Text } from "@chakra-ui/react";
-// import { motion } from "framer-motion";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Icon,
+  Image,
+  Input,
+  Select,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import { FiPaperclip } from "react-icons/fi";
+import captcha from "../assets/captcha.png";
+const Form = () => {
+  const inputRef = useRef(null);
 
-// function App() {
-//   const [selectedBox, setSelectedBox] = useState(null);
+  const [sliderValue, setSliderValue] = useState(0);
 
-//   const backgrounds = {
-//     box1: banner,
-//     box2: heart,
-//     box3: banner,
-//   };
-
-//   const getBoxSize = (box) => {
-//     return selectedBox === box ? "200px" : "150px";
-//   };
-
-//   const getBoxHeight = (box) => {
-//     return selectedBox === box ? "250px" : "200px";
-//   };
-
-//   return (
-//     <ChakraProvider>
-//       <Box
-//         h="100vh"
-//         bgImage={selectedBox ? backgrounds[selectedBox] : "url('/path/to/default.jpg')"}
-//         bgSize="cover"
-//         bgPosition="center"
-//       >
-//         <Center h="100%">
-//           <Box
-//             display="flex"
-//             justifyContent="center"
-//             alignItems="center"
-//             gap="4"
-//           >
-//             {/* Box 1 */}
-//             <motion.div
-//               layout
-//               transition={{ type: "twwen", stiffness: 500, damping: 50 }}
-//             >
-//               <Box
-//                 w={getBoxSize("box1")}
-//                 h={getBoxHeight("box1")}
-//                 bg="red.500"
-//                 onClick={() => setSelectedBox("box1")}
-//                 cursor="pointer"
-//                 display="flex"
-//                 justifyContent="center"
-//                 alignItems="center"
-//                 borderRadius="md"
-//                 shadow="lg"
-//                 bgGradient="linear(to-b, red.300, red.600)"
-//                 transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-//                 _hover={{
-//                   transform: "scale(1.05)",
-//                   boxShadow: "2xl",
-//                 }}
-//               >
-//                 <Text fontSize="2xl" color="white">RG</Text>
-//               </Box>
-//             </motion.div>
-
-//             {/* Box 2 */}
-//             <motion.div
-//               layout
-//               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-//             >
-//               <Box
-//                 w={getBoxSize("box2")}
-//                 h={getBoxHeight("box2")}
-//                 bg="blue.500"
-//                 onClick={() => setSelectedBox("box2")}
-//                 cursor="pointer"
-//                 display="flex"
-//                 justifyContent="center"
-//                 alignItems="center"
-//                 borderRadius="md"
-//                 shadow="lg"
-//                 bgGradient="linear(to-b, blue.300, blue.600)"
-//                 transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-//                 _hover={{
-//                   transform: "scale(1.05)",
-//                   boxShadow: "2xl",
-//                 }}
-//               >
-//                 <Text fontSize="2xl" color="white">🏠</Text>
-//               </Box>
-//             </motion.div>
-
-//             {/* Box 3 */}
-//             <motion.div
-//               layout
-//               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-//             >
-//               <Box
-//                 w={getBoxSize("box3")}
-//                 h={getBoxHeight("box3")}
-//                 bg="purple.500"
-//                 onClick={() => setSelectedBox("box3")}
-//                 cursor="pointer"
-//                 display="flex"
-//                 justifyContent="center"
-//                 alignItems="center"
-//                 borderRadius="md"
-//                 shadow="lg"
-//                 bgGradient="linear(to-b, purple.300, purple.600)"
-//                 transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-//                 _hover={{
-//                   transform: "scale(1.05)",
-//                   boxShadow: "2xl",
-//                 }}
-//               >
-//                 <Text fontSize="2xl" color="white">🎮</Text>
-//               </Box>
-//             </motion.div>
-//           </Box>
-//         </Center>
-//       </Box>
-//     </ChakraProvider>
-//   );
-// }
-
-// export default App;
-
-import banner from "../../assets/handvector.png";
-import heart from "../../assets/health.png";
-import React, { useState } from "react";
-import { ChakraProvider, Box, Center, Text } from "@chakra-ui/react";
-import { motion, AnimatePresence } from "framer-motion";
-
-function App() {
-  const [selectedBox, setSelectedBox] = useState(null);
-
-  const backgrounds = {
-    box1: `url(${banner})`,
-    box2: `url(${heart})`,
-    box3: `url(${banner})`,
+  const handleSliderChange = (value) => {
+    setSliderValue(value);
+  };
+  const handleClick = () => {
+    inputRef.current.click();
   };
 
-  const getBoxSize = (box) => (selectedBox === box ? "200px" : "150px");
-  const getBoxHeight = (box) => (selectedBox === box ? "250px" : "200px");
-
+  const handleChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      console.log(file.name);
+    }
+  };
   return (
-    <ChakraProvider>
-      <Box position="relative" h="100vh">
-        <AnimatePresence>
-          {selectedBox && (
-            <motion.div
-              key={selectedBox}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundImage: backgrounds[selectedBox],
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-          )}
-        </AnimatePresence>
-        <Center h="100%" position="relative">
-          <Box display="flex" justifyContent="center" alignItems="center" gap="4">
-            {/* Box 1 */}
-            <motion.div
-              layout
-              transition={{ type: "tween", stiffness: 300, damping: 20 }}
-            >
+    <div>
+      <Box bgColor="black" p={"4rem"} w="100vw">
+        <Box
+          display="flex"
+          bgColor="#0F0F0F"
+          flexDirection="column"
+          alignItems="center"
+          w="100%"
+          px={"4rem"}
+          py={"2rem"}
+        >
+          <Heading
+            fontWeight={600}
+            lineHeight="57.4px"
+            fontSize="40px"
+            textAlign="center"
+            color="#FBFBFB"
+            w={"50%"}
+          >
+            Lets Collaborate to Shape your Vision into Reality{" "}
+          </Heading>
+          <Box display="flex" w="100%">
+            <FormControl display="flex" gap={4} flexDirection="column">
               <Box
-                w={getBoxSize("box1")}
-                h={getBoxHeight("box1")}
-                bg="red.500"
-                onClick={() => setSelectedBox("box1")}
-                cursor="pointer"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="md"
-                shadow="lg"
-                bgGradient="linear(to-b, red.300, red.600)"
-                transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{
-                  transform: "scale(1.05)",
-                  boxShadow: "2xl",
-                }}
+                display="grid"
+                gridTemplateColumns="repeat(2, 1fr)"
+                gap={2}
+                justifyItems="center"
               >
-                <Text fontSize="2xl" color="white">RG</Text>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">Enter your name</FormLabel>
+                  <Input
+                    border="1px solid #E5195E"
+                    w="100%"
+                    focusBorderColor="#E5195E"
+                    type="text"
+                    backgroundColor="#E5195E0A"
+                    color="white"
+                  />
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">
+                    Enter your email address
+                  </FormLabel>
+                  <Input
+                    border="1px solid #E5195E"
+                    w="100%"
+                    focusBorderColor="#E5195E0A"
+                    type="text"
+                    backgroundColor="#E5195E0A"
+                    color="white"
+                  />
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">Select your country</FormLabel>
+                  <Select border="1px solid #E5195E" w="100%" color="#FFFFFF">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">
+                    Enter your contact number
+                  </FormLabel>
+                  <Input
+                    border="1px solid #E5195E"
+                    w="100%"
+                    focusBorderColor="#E5195E"
+                    type="text"
+                    backgroundColor="#E5195E0A"
+                    color="white"
+                  />
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">Select your services</FormLabel>
+                  <Select border="1px solid #E5195E" w="100%" color="white">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">
+                    Where did you hear about us? *
+                  </FormLabel>
+                  <Select border="1px solid #E5195E" w="100%" color="white">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
               </Box>
-            </motion.div>
 
-            {/* Box 2 */}
-            <motion.div
-              layout
-              transition={{ type: "tween", stiffness: 300, damping: 20 }}
-            >
-              <Box
-                w={getBoxSize("box2")}
-                h={getBoxHeight("box2")}
-                bg="blue.500"
-                onClick={() => setSelectedBox("box2")}
-                cursor="pointer"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="md"
-                shadow="lg"
-                bgGradient="linear(to-b, blue.300, blue.600)"
-                transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{
-                  transform: "scale(1.05)",
-                  boxShadow: "2xl",
-                }}
-              >
-                <Text fontSize="2xl" color="white">🏠</Text>
+              <Box w="100%" maxW="1186px">
+                <FormLabel color="#FFFFFF">
+                  Tell us about your project and business challenge.
+                </FormLabel>
+                <Textarea
+                  border="1px solid #E5195E"
+                  w="100%"
+                  focusBorderColor="#E5195E"
+                  backgroundColor="#E5195E0A"
+                  color="white"
+                  minH="65px"
+                />
               </Box>
-            </motion.div>
 
-            {/* Box 3 */}
-            <motion.div
-              layout
-              transition={{ type: "tween", stiffness: 300, damping: 20 }}
-            >
               <Box
-                w={getBoxSize("box3")}
-                h={getBoxHeight("box3")}
-                bg="purple.500"
-                onClick={() => setSelectedBox("box3")}
-                cursor="pointer"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius="md"
-                shadow="lg"
-                bgGradient="linear(to-b, purple.300, purple.600)"
-                transition="transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{
-                  transform: "scale(1.05)",
-                  boxShadow: "2xl",
-                }}
+                display="grid"
+                gridTemplateColumns="repeat(2, 1fr)"
+                gap={5}
+                justifyItems="center"
               >
-                <Text fontSize="2xl" color="white">🎮</Text>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">
+                    When would you like to start
+                  </FormLabel>
+                  <Select border="1px solid #E5195E" w="100%" color="white">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
+                <Box w="100%" maxW="570px">
+                  <FormLabel color="#FFFFFF">Attach file</FormLabel>
+                  <Input
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleChange}
+                    display="none"
+                  />
+                  <Button
+                    onClick={handleClick}
+                    leftIcon={<Icon as={FiPaperclip} />}
+                    variant="outline"
+                    bgColor="#E5195E12"
+                    border="1px solid #E5195E"
+                    borderRadius="10px"
+                    size="md"
+                    _hover={{ bg: "#E5195E12" }}
+                    w="100%"
+                    color="#fff"
+                  >
+                    Attach file
+                  </Button>
+                </Box>
               </Box>
-            </motion.div>
+
+              <Box w="100%" px={"4rem"} color="white" borderRadius="md">
+                <Text mb={4} fontWeight="400" fontSize="18px">
+                  What is the budget of your project?
+                </Text>
+                <Slider
+                  aria-label="budget-slider"
+                  defaultValue={0}
+                  min={0}
+                  max={500000}
+                  step={110000}
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  colorScheme="pink"
+                >
+                  <SliderTrack bg="gray.700" height="2px">
+                    <SliderFilledTrack bg="#E5195E" />
+                  </SliderTrack>
+                  <SliderThumb boxSize={5} bg="#E5195E"></SliderThumb>
+                </Slider>
+                <Flex justify="space-between">
+                  {[0, 100000, 200000, 300000, 500000].map((val, index) => (
+                    <Box
+                      display="flex"
+                      key={index}
+                      alignItems="center"
+                      textAlign="center"
+                    >
+                      <Box
+                        top="11px"
+                        as="button"
+                        borderRadius="50%"
+                        w="8.34px"
+                        h="8.34px"
+                        px="0"
+                        marginTop="-1.9rem"
+                        position="relative"
+                        mb={"3rem"}
+                        bgColor={sliderValue >= val ? "#E5195E" : "gray.600"}
+                      >
+                        <Box
+                          top="-2.8px"
+                          right="7px"
+                          as="button"
+                          borderRadius="50%"
+                          w={sliderValue >= val ? "22.94px" : null}
+                          h={sliderValue >= val ? "22.94px" : null}
+                          px="0"
+                          marginTop="-1rem"
+                          position="relative"
+                          mb={"3rem"}
+                          bgColor={
+                            sliderValue >= val ? "#E5195E42" : "gray.600"
+                          }
+                        />
+                      </Box>
+                      <Text color="gray.400" fontSize="sm">
+                        {val / 1000}k
+                      </Text>
+                    </Box>
+                  ))}
+                </Flex>
+              </Box>
+              <Box
+                w="100%"
+                maxW="1186px"
+                display="flex"
+                flexDirection="column"
+                gap={4}
+              >
+                <FormLabel color="#FFFFFF">
+                  Please type the letters below
+                </FormLabel>
+                <Textarea
+                  border="1px solid #E5195E"
+                  w="100%"
+                  focusBorderColor="#E5195E"
+                  backgroundColor="#E5195E0A"
+                  color="white"
+                  minH="65px"
+                />
+                <Box>
+                  <Image
+                    src={captcha}
+                    w={"147px"}
+                    h={"55px"}
+                    borderRadius="1px"
+                  />
+                </Box>
+              </Box>
+              <Box px={"5rem"}>
+                <Button bgColor="#E5195E" w="912px" h="55px" borderRadius="0px">
+                  Submit
+                </Button>
+              </Box>
+            </FormControl>
           </Box>
-        </Center>
+        </Box>
       </Box>
-    </ChakraProvider>
+    </div>
   );
-}
+};
 
-export default App;
+export default Form;
